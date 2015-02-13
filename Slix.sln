@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slix", "Slix\Slix.csproj", "{1DF3D420-7D57-408E-BC4E-0CF7C0F613C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_POC", "WPF_POC\WPF_POC.csproj", "{13FED61B-F36A-4E00-A244-9DDAF4B5703F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console_POC", "Console_POC\Console_POC.csproj", "{1E43610A-B2EC-4A9E-A840-F272B837EE45}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DF3D420-7D57-408E-BC4E-0CF7C0F613C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DF3D420-7D57-408E-BC4E-0CF7C0F613C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DF3D420-7D57-408E-BC4E-0CF7C0F613C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DF3D420-7D57-408E-BC4E-0CF7C0F613C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13FED61B-F36A-4E00-A244-9DDAF4B5703F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13FED61B-F36A-4E00-A244-9DDAF4B5703F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13FED61B-F36A-4E00-A244-9DDAF4B5703F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13FED61B-F36A-4E00-A244-9DDAF4B5703F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E43610A-B2EC-4A9E-A840-F272B837EE45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E43610A-B2EC-4A9E-A840-F272B837EE45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E43610A-B2EC-4A9E-A840-F272B837EE45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E43610A-B2EC-4A9E-A840-F272B837EE45}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
