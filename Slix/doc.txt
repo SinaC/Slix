@@ -1,0 +1,11 @@
+﻿http://gamedev.stackexchange.com/questions/1796/vehicle-physics-with-skid
+http://www.openprocessing.org/sketch/89802
+http://www.iforce2d.net/b2dtut/top-down-car
+http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games.html
+http://www.gamedev.net/page/resources/_/technical/math-and-physics/2d-car-physics-r2443
+http://engineeringdotnet.blogspot.be/2010/04/simple-2d-car-physics-in-games.html
+http://stackoverflow.com/questions/667034/simple-physics-based-movement
+http://www.miata.net/sport/Physics/
+http://gamedev.stackexchange.com/questions/23093/creating-sideways-friction-in-a-2d-top-down-racer
+http://www.gamedev.net/topic/470497-2d-car-physics-tutorial/
+http://www.emanueleferonato.com/2009/04/06/two-ways-to-make-box2d-cars/

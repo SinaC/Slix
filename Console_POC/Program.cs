@@ -21,7 +21,7 @@ namespace Console_POC
             DisplayLine(0, 5, "Friction: {0:F4}", car.GameParameters.Friction);
 
             DisplayLine(0, 7, "Angle: {0:F8}", car.Angle);
-            DisplayLine(0, 8, "Location: {0:F8}, {1:F8}", car.LocationX, car.LocationY);
+            DisplayLine(0, 8, "Location: {0:F8}, {1:F8}", car.PositionX, car.PositionY);
             DisplayLine(0, 9, "Velocity: {0:F8}, {1:F8}", car.VelocityX, car.VelocityY);
             DisplayLine(0, 10, "Power: {0:F8}", car.Power);
             DisplayLine(0, 11, "Steering: {0:F8}", car.Steering);

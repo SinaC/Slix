@@ -46,8 +46,14 @@
   <ItemGroup>
     <Compile Include="Actions.cs" />
     <Compile Include="Car.cs" />
+    <Compile Include="Car4Wheels.cs" />
+    <Compile Include="CarRobot.cs" />
+    <Compile Include="CarSkid.cs" />
     <Compile Include="GameParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="doc.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
