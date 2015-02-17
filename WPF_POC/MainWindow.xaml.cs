@@ -25,9 +25,10 @@ namespace WPF_POC
         private static Dispatcher _uiDispatcher;
         private Actions _currentActions;
         //private Car _car;
-        private CarSkid _car;
+        //private CarSkid _car;
         //private CarRobot _car;
         //private Car4Wheels _car;
+        private CarPhysics _car;
         private Ellipse _carUI;
 
         public MainWindow()
@@ -139,8 +140,9 @@ namespace WPF_POC
             //Canvas.SetTop(_carUI, _car.CarLocationY / 100);
 
             //RotateTransform rotateTransform = new RotateTransform(_car.Angle, _carUI.ActualWidth / 2.0, _carUI.ActualHeight / 2.0);
-            RotateTransform rotateTransform = new RotateTransform(_car.Angle*180.0/Math.PI, _carUI.ActualWidth / 2.0, _carUI.ActualHeight / 2.0);
+            //RotateTransform rotateTransform = new RotateTransform(_car.Angle*180.0/Math.PI, _carUI.ActualWidth / 2.0, _carUI.ActualHeight / 2.0);
             //RotateTransform rotateTransform = new RotateTransform(_car.CarHeading * 180.0 / Math.PI, _carUI.ActualWidth / 2.0, _carUI.ActualHeight / 2.0);
+            RotateTransform rotateTransform = new RotateTransform(_car.AngleInRadians * 180.0 / Math.PI, _carUI.ActualWidth / 2.0, _carUI.ActualHeight / 2.0);
             //RotateTransform rotateTransform = new RotateTransform(_car.Angle, 0, 0);
             _carUI.RenderTransform = rotateTransform;
 
@@ -154,11 +156,11 @@ namespace WPF_POC
             //txtPower.Text = String.Format("Power: {0:F6}",_car.Power);
             //txtSteering.Text = String.Format("Steering: {0:F6}", _car.Steering);
 
-            txtHandling.Text = String.Format("TurnSpeed: {0:F6}", _car.TurnSpeed);
-            txtAcceleration.Text = String.Format("Acceleration: {0:F6}", _car.Acceleration);
-            txtAngle.Text = String.Format("Angle: {0:F6}", _car.Angle);
-            txtVelocity.Text = String.Format("Velocity: {0:F6} {1:F6}", _car.VelocityX, _car.VelocityY);
-            txtSteering.Text = String.Format("AngularVelocity: {0:F6}", _car.AngularVelocity);
+            //txtHandling.Text = String.Format("TurnSpeed: {0:F6}", _car.TurnSpeed);
+            //txtAcceleration.Text = String.Format("Acceleration: {0:F6}", _car.Acceleration);
+            //txtAngle.Text = String.Format("Angle: {0:F6}", _car.Angle);
+            //txtVelocity.Text = String.Format("Velocity: {0:F6} {1:F6}", _car.VelocityX, _car.VelocityY);
+            //txtSteering.Text = String.Format("AngularVelocity: {0:F6}", _car.AngularVelocity);
 
             //txtHandling.Text = String.Format("Handling: {0:F6}", _car.Handling);
             //txtAcceleration.Text = String.Format("Acceleration: {0:F6}", _car.MaxAcceleration);
@@ -174,17 +176,19 @@ namespace WPF_POC
             //{
             //    Friction = 0.87
             //});
-            _car.Initialize(200, 200, 0, 0.9, 0.4, 5 * Math.PI / 180.0, 100, 0.5);
+            //_car.Initialize(200, 200, 0, 0.9, 0.4, 5 * Math.PI / 180.0, 100, 0.5);
             //_car.Initialize(200, 200, 0, 10, 500, 100, 15*Math.PI/180.0, 0.9);
             //_car.Initialize(200,200,0);
+            _car.Initialize(200, 200, 0);
         }
 
         private void GameTask()
         {
             //_car = new Car();
-            _car = new CarSkid();
+            //_car = new CarSkid();
             //_car = new CarRobot();
             //_car = new Car4Wheels();
+            _car = new CarPhysics();
             ResetCar();
 
             while(true)

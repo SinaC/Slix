@@ -47,6 +47,8 @@
     <Compile Include="Actions.cs" />
     <Compile Include="Car.cs" />
     <Compile Include="Car4Wheels.cs" />
+    <Compile Include="CarFarseerPhysics.cs" />
+    <Compile Include="CarPhysics.cs" />
     <Compile Include="CarRobot.cs" />
     <Compile Include="CarSkid.cs" />
     <Compile Include="GameParameters.cs" />
@@ -54,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="doc.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Farseer Physics Engine 3.5\Farseer Physics.csproj">
+      <Project>{a4610e4c-dd34-428b-babb-779ca0b5993a}</Project>
+      <Name>Farseer Physics</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
