@@ -49,6 +49,7 @@
     <Compile Include="Car4Wheels.cs" />
     <Compile Include="CarFarseerPhysics.cs" />
     <Compile Include="CarPhysics.cs" />
+    <Compile Include="CarPhysics2.cs" />
     <Compile Include="CarRobot.cs" />
     <Compile Include="CarSkid.cs" />
     <Compile Include="GameParameters.cs" />

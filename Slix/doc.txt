@@ -9,3 +9,7 @@ http://www.miata.net/sport/Physics/
 http://gamedev.stackexchange.com/questions/23093/creating-sideways-friction-in-a-2d-top-down-racer
 http://www.gamedev.net/topic/470497-2d-car-physics-tutorial/
 http://www.emanueleferonato.com/2009/04/06/two-ways-to-make-box2d-cars/
+http://www.gamedev.net/topic/542915-car-physics---slip-ratio-and-torque/
+https://www.physicsforums.com/threads/physics-simulation-angular-velocity-applications.268288/
+http://ploobs.com.br/?p=2278
+http://vdrift.net/

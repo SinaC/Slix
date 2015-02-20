@@ -14,7 +14,7 @@ namespace Slix
         public double AngleInRadians { get; private set; }
         public double CarSpeed { get; private set; }
         public double SteerAngle { get; private set; }
-        
+
         public double ForwardVectorX { get; private set; }
         public double ForwardVectorY { get; private set; }
         public double RightVectorX { get; private set; }
@@ -39,30 +39,30 @@ namespace Slix
             if (actions.Brake)
                 CarSpeed -= 10;
             if (actions.Left)
-                SteerAngle = -5 * Math.PI / 180;
+                SteerAngle = -5*Math.PI/180;
             if (actions.Right)
-                SteerAngle = 5 * Math.PI / 180;
+                SteerAngle = 5*Math.PI/180;
         }
 
         public void Step(double dt)
         {
-            double velocityX = CarSpeed * ForwardVectorX;
-            double velocityY = CarSpeed * ForwardVectorY;
+            double velocityX = CarSpeed*ForwardVectorX;
+            double velocityY = CarSpeed*ForwardVectorY;
 
-            //double dotVelocityForward = Dot(velocityX, velocityY, ForwardVectorX, ForwardVectorY);
-            //double forwardVelocityX = ForwardVectorX * dotVelocityForward;
-            //double forwardVelocityY = ForwardVectorY * dotVelocityForward;
-            //double dotVelocityRight = Dot(velocityX, velocityY, RightVectorX, RightVectorY);
-            //double rightVelocityX = RightVectorX * dotVelocityRight;
-            //double rightVelocityY = RightVectorY * dotVelocityRight;
-            //velocityX = forwardVelocityX + rightVelocityX * 0.1;
-            //velocityY = forwardVelocityY + rightVelocityY * 0.1;
+            double dotVelocityForward = Dot(velocityX, velocityY, ForwardVectorX, ForwardVectorY);
+            double forwardVelocityX = ForwardVectorX*dotVelocityForward;
+            double forwardVelocityY = ForwardVectorY*dotVelocityForward;
+            double dotVelocityRight = Dot(velocityX, velocityY, RightVectorX, RightVectorY);
+            double rightVelocityX = RightVectorX*dotVelocityRight;
+            double rightVelocityY = RightVectorY*dotVelocityRight;
+            velocityX = forwardVelocityX + rightVelocityX*0.1;
+            velocityY = forwardVelocityY + rightVelocityY*0.1;
 
-            //System.Diagnostics.Debug.WriteLine("ForwardVelocity: {0:F6} {1:F6}", forwardVelocityX, forwardVelocityY);
-            //System.Diagnostics.Debug.WriteLine("RightVelocity: {0:F6} {1:F6}", rightVelocityX, rightVelocityY);
-            //System.Diagnostics.Debug.WriteLine("ForwardVector: {0:F6} {1:F6}", ForwardVectorX, ForwardVectorY);
-            //System.Diagnostics.Debug.WriteLine("RightVector: {0:F6} {1:F6}", RightVectorX, RightVectorY);
-            //System.Diagnostics.Debug.WriteLine("Velocity: {0:F6} {1:F6}", velocityX, velocityY);
+            System.Diagnostics.Debug.WriteLine("ForwardVelocity: {0:F6} {1:F6}", forwardVelocityX, forwardVelocityY);
+            System.Diagnostics.Debug.WriteLine("RightVelocity: {0:F6} {1:F6}", rightVelocityX, rightVelocityY);
+            System.Diagnostics.Debug.WriteLine("ForwardVector: {0:F6} {1:F6}", ForwardVectorX, ForwardVectorY);
+            System.Diagnostics.Debug.WriteLine("RightVector: {0:F6} {1:F6}", RightVectorX, RightVectorY);
+            System.Diagnostics.Debug.WriteLine("Velocity: {0:F6} {1:F6}", velocityX, velocityY);
 
             PositionX += velocityX;
             PositionY += velocityY;
@@ -82,7 +82,7 @@ namespace Slix
             ForwardVectorX = Math.Cos(AngleInRadians);
             ForwardVectorY = Math.Sin(AngleInRadians);
             RightVectorX = Math.Cos(AngleInRadians - Math.PI/2);
-            RightVectorY = Math.Sin(AngleInRadians - Math.PI / 2);
+            RightVectorY = Math.Sin(AngleInRadians - Math.PI/2);
         }
     }
 }
