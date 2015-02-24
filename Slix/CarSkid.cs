@@ -9,7 +9,7 @@ namespace Slix
         public double AngularDrag { get; private set; } // How fast the car stops spinning
         public double TurnSpeed { get; private set; } // How fast to turn
         public double HandBrakeMultiplicativeTurnSpeed { get; private set; }
-        public double Power { get; private set; } //
+        public double MaxPower { get; private set; } //
 
         public double Velocity { get; private set; }
         public double PositionX { get; private set; } // Where the car is
@@ -18,8 +18,9 @@ namespace Slix
         public double VelocityY { get; private set; }
         public double Angle { get; private set; } // The rotation of the car, in radians
         public double AngularVelocity { get; private set; } // Speed the car is spinning, in radians
+        public double Power { get; private set; }
 
-        public void Initialize(double positionX, double positionY, double angle, double drag, double angularDrag, double power, double turnSpeed, double handBrakeMultiplicativeTurnSpeed)
+        public void Initialize(double positionX, double positionY, double angle, double drag, double angularDrag, double maxPower, double turnSpeed, double handBrakeMultiplicativeTurnSpeed)
         {
             PositionX = positionX;
             PositionY = positionY;
@@ -29,7 +30,7 @@ namespace Slix
             AngularDrag = angularDrag;
             TurnSpeed = turnSpeed;
             HandBrakeMultiplicativeTurnSpeed = handBrakeMultiplicativeTurnSpeed;
-            Power = power;
+            MaxPower = maxPower;
 
             Velocity = 0;
             VelocityX = 0;
@@ -51,44 +52,101 @@ namespace Slix
             // Accelerate/Brake
             if (actions.Accelerate)
             {
-                VelocityX += Math.Cos(Angle) * Power;
-                VelocityY += Math.Sin(Angle) * Power;
+                Power = MaxPower;
             }
-            if (actions.Brake)
+            else if (actions.Brake)
             {
-                VelocityX -= Math.Cos(Angle) * Power;
-                VelocityY -= Math.Sin(Angle) * Power;
+                Power = -MaxPower/2.0;
             }
+            else
+                Power = 0;
 
             // Steer (+ handbrake)
             if (actions.Left)
+            {
                 if (actions.HandBrake)
-                    AngularVelocity -= TurnSpeed*HandBrakeMultiplicativeTurnSpeed;
+                    AngularVelocity = -TurnSpeed * HandBrakeMultiplicativeTurnSpeed;
                 else
-                    AngularVelocity -= TurnSpeed;
+                    AngularVelocity = -TurnSpeed;
+            }
             if (actions.Right)
+            {
                 if (actions.HandBrake)
-                    AngularVelocity += TurnSpeed*HandBrakeMultiplicativeTurnSpeed;
+                    AngularVelocity = TurnSpeed * HandBrakeMultiplicativeTurnSpeed;
                 else
-                    AngularVelocity += TurnSpeed;
+                    AngularVelocity = TurnSpeed;
+            }
 
-            // Handbrake
+            // Handbrake (no steer)
             if (actions.HandBrake && !actions.Left && !actions.Right)
             {
-                VelocityX -= Math.Cos(Angle) * Power;
-                VelocityY -= Math.Sin(Angle) * Power;
+                Power = -MaxPower/4;
             }
         }
 
         public void Step(double dt)
         {
-            PositionX += VelocityX;
-            PositionY += VelocityY;
+            VelocityX += Math.Cos(Angle)*Power;
+            VelocityY += Math.Sin(Angle)*Power;
+
             VelocityX *= Drag;
             VelocityY *= Drag;
+
+            PositionX += VelocityX;
+            PositionY += VelocityY;
 
             Angle += AngularVelocity;
             AngularVelocity *= AngularDrag;
         }
+
+        //public void HandleActions(Actions actions)
+        //{
+        //    // Accelerate/Brake
+        //    if (actions.Accelerate)
+        //    {
+        //        VelocityX += Math.Cos(Angle) * Power;
+        //        VelocityY += Math.Sin(Angle) * Power;
+        //    }
+        //    if (actions.Brake)
+        //    {
+        //        VelocityX -= Math.Cos(Angle) * Power;
+        //        VelocityY -= Math.Sin(Angle) * Power;
+        //    }
+
+        //    // Steer (+ handbrake)
+        //    if (actions.Left)
+        //    {
+        //        if (actions.HandBrake)
+        //            AngularVelocity -= TurnSpeed*HandBrakeMultiplicativeTurnSpeed;
+        //        else
+        //            AngularVelocity -= TurnSpeed;
+        //    }
+        //    if (actions.Right)
+        //    {
+        //        if (actions.HandBrake)
+        //            AngularVelocity -= TurnSpeed*HandBrakeMultiplicativeTurnSpeed;
+        //        else
+        //            AngularVelocity -= TurnSpeed;
+        //    }
+
+        //    // Handbrake
+        //    if (actions.HandBrake && !actions.Left && !actions.Right)
+        //    {
+        //        VelocityX -= Math.Cos(Angle) * Power;
+        //        VelocityY -= Math.Sin(Angle) * Power;
+        //    }
+        //}
+
+        //public void Step(double dt)
+        //{
+        //    VelocityX *= Drag;
+        //    VelocityY *= Drag;
+
+        //    PositionX += VelocityX;
+        //    PositionY += VelocityY;
+
+        //    Angle += AngularVelocity;
+        //    AngularVelocity *= AngularDrag;
+        //}
     }
 }

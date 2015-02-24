@@ -13,3 +13,14 @@ http://www.gamedev.net/topic/542915-car-physics---slip-ratio-and-torque/
 https://www.physicsforums.com/threads/physics-simulation-angular-velocity-applications.268288/
 http://ploobs.com.br/?p=2278
 http://vdrift.net/
+http://www.newtondynamics.com/forum/viewtopic.php?f=9&t=5682
+http://www.racer.nl/reference/pacejka.htm
+http://code.eng.buffalo.edu/dat/sites/tire/tire.html
+
+http://gamedev.stackexchange.com/questions/18317/car-movement-in-arcade-racing-game
+http://gafferongames.com/game-physics/physics-in-3d/
+http://gamedev.stackexchange.com/questions/55857/car-movement-in-2d-dimension
+http://sourceforge.net/projects/supertuxkart/
+https://github.com/leereilly/games#user-content-racing
+https://wiki.archlinux.org/index.php/List_of_games#Arcade
+http://sourceforge.net/projects/dustrac/

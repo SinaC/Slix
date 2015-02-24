@@ -25,7 +25,7 @@ namespace WPF_POC
         private static Dispatcher _uiDispatcher;
         private Actions _currentActions;
         private CarPhysics2 _car;
-        private Ellipse _carUI;
+        private FrameworkElement _carUI;
 
         private List<string> _datas = new List<string>();
 
@@ -35,11 +35,17 @@ namespace WPF_POC
 
             InitializeComponent();
 
-            _carUI = new Ellipse
+            //_carUI = new Ellipse
+            //    {
+            //        Width = 20,
+            //        Height = 10,
+            //        Fill = new SolidColorBrush(Colors.Black)
+            //    };
+            _carUI = new Rectangle
                 {
                     Width = 20,
                     Height = 10,
-                    Fill = new SolidColorBrush(Colors.Black)
+                    Stroke = new SolidColorBrush(Colors.Black)
                 };
             canvasTest.Children.Add(_carUI);
 
@@ -49,6 +55,16 @@ namespace WPF_POC
             AddBend(300, 300, 100, Colors.Orange);
             AddBend(500, 100, 100, Colors.Red);
             AddBend(500, 300, 100, Colors.Red);
+
+
+            CarPacejka pacejka = new CarPacejka();
+            pacejka.Initialize();
+            pacejka.SetLoad(3500);
+            pacejka.SetCamber(0);
+            pacejka.SetSlipAngle(0);
+            pacejka.SetSlipRatio(0);
+            pacejka.Calculate();
+
 
             Task.Factory.StartNew(GameTask);
         }

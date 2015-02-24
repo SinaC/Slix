@@ -25,11 +25,12 @@ namespace WPF_POC
         private static Dispatcher _uiDispatcher;
         private Actions _currentActions;
         //private Car _car;
-        private CarSkid _car;
+        //private CarSkid _car;
         //private CarRobot _car;
         //private Car4Wheels _car;
         //private CarPhysics _car;
-        private Ellipse _carUI;
+        private Car2Wheels _car;
+        private FrameworkElement _carUI;
 
         public MainWindow()
         {
@@ -37,12 +38,18 @@ namespace WPF_POC
 
             InitializeComponent();
 
-            _carUI = new Ellipse
-                {
-                    Width = 20,
-                    Height = 10,
-                    Fill = new SolidColorBrush(Colors.Black)
-                };
+            //_carUI = new Ellipse
+            //    {
+            //        Width = 20,
+            //        Height = 10,
+            //        Fill = new SolidColorBrush(Colors.Black)
+            //    };
+            _carUI = new Rectangle
+            {
+                Width = 20,
+                Height = 10,
+                Stroke = new SolidColorBrush(Colors.Black)
+            };
             canvasTest.Children.Add(_carUI);
 
             AddBend(100, 100, 100, Colors.Yellow);
@@ -146,18 +153,21 @@ namespace WPF_POC
         {
             //Canvas.SetLeft(_carUI, _car.PositionX);
             //Canvas.SetTop(_carUI, _car.PositionY);
-            Canvas.SetLeft(_carUI, _car.PositionX);
-            Canvas.SetTop(_carUI, _car.PositionY);
+            //Canvas.SetLeft(_carUI, _car.PositionX);
+            //Canvas.SetTop(_carUI, _car.PositionY);
             //Canvas.SetLeft(_carUI, _car.LocationX / 50);
             //Canvas.SetTop(_carUI, _car.LocationY / 50);
             //Canvas.SetLeft(_carUI, _car.CarLocationX / 100);
             //Canvas.SetTop(_carUI, _car.CarLocationY / 100);
+            Canvas.SetLeft(_carUI, _car.Position.X / 50);
+            Canvas.SetTop(_carUI, _car.Position.Y / 50);
 
             //RotateTransform rotateTransform = new RotateTransform(_car.Angle, _carUI.ActualWidth / 2.0, _carUI.ActualHeight / 2.0);
-            RotateTransform rotateTransform = new RotateTransform(_car.Angle*180.0/Math.PI, _carUI.ActualWidth / 2.0, _carUI.ActualHeight / 2.0);
+            //RotateTransform rotateTransform = new RotateTransform(_car.Angle*180.0/Math.PI, _carUI.ActualWidth / 2.0, _carUI.ActualHeight / 2.0);
             //RotateTransform rotateTransform = new RotateTransform(_car.CarHeading * 180.0 / Math.PI, _carUI.ActualWidth / 2.0, _carUI.ActualHeight / 2.0);
             //RotateTransform rotateTransform = new RotateTransform(_car.AngleInRadians * 180.0 / Math.PI, _carUI.ActualWidth / 2.0, _carUI.ActualHeight / 2.0);
             //RotateTransform rotateTransform = new RotateTransform(_car.Angle, 0, 0);
+            RotateTransform rotateTransform = new RotateTransform(_car.Direction * 180.0 / Math.PI, _carUI.ActualWidth / 2.0, _carUI.ActualHeight / 2.0);
             _carUI.RenderTransform = rotateTransform;
 
             //txtMaxPower.Text = String.Format("MaxPower: {0:F6}",_car.MaxPower);
@@ -170,12 +180,12 @@ namespace WPF_POC
             //txtPower.Text = String.Format("Power: {0:F6}",_car.Power);
             //txtSteering.Text = String.Format("Steering: {0:F6}", _car.Steering);
 
-            txtHandling.Text = String.Format("TurnSpeed: {0:F6}", _car.TurnSpeed);
-            txtAcceleration.Text = String.Format("Power: {0:F6}", _car.Power);
-            txtAngle.Text = String.Format("Angle: {0:F6}", _car.Angle);
-            double velocity = Math.Sqrt(_car.VelocityX*_car.VelocityX + _car.VelocityY*_car.VelocityY);
-            txtVelocity.Text = String.Format("Velocity: {0:F6} : {1:F6} {2:F6}", velocity, _car.VelocityX, _car.VelocityY);
-            txtSteering.Text = String.Format("AngularVelocity: {0:F6}", _car.AngularVelocity);
+            //txtHandling.Text = String.Format("TurnSpeed: {0:F6}", _car.TurnSpeed);
+            //txtAcceleration.Text = String.Format("Power: {0:F6}", _car.MaxPower);
+            //txtAngle.Text = String.Format("Angle: {0:F6}", _car.Angle);
+            //double velocity = Math.Sqrt(_car.VelocityX*_car.VelocityX + _car.VelocityY*_car.VelocityY);
+            //txtVelocity.Text = String.Format("Velocity: {0:F6} -> {1:F6} {2:F6}", velocity, _car.VelocityX, _car.VelocityY);
+            //txtSteering.Text = String.Format("AngularVelocity: {0:F6}", _car.AngularVelocity);
 
             //txtHandling.Text = String.Format("Handling: {0:F6}", _car.Handling);
             //txtAcceleration.Text = String.Format("Acceleration: {0:F6}", _car.MaxAcceleration);
@@ -183,6 +193,10 @@ namespace WPF_POC
             //txtBraking.Text = String.Format("MaxBackwardSpeed: {0:F6}", _car.MaxBackwardSpeed);
             //txtAngle.Text = String.Format("Angle: {0:F6}", _car.Angle);
             //txtVelocity.Text = String.Format("Velocity: {0:F6} -> {1:F6}", _car.CurrentSpeed, _car.DesiredSpeed);
+
+            txtAngle.Text = String.Format("Angle: {0:F6}", _car.Angle);
+            txtVelocity.Text = String.Format("Speed: {0:F6}", _car.Speed);
+            txtSteering.Text = String.Format("Direction: {0:F6}", _car.Direction);
         }
 
         private void ResetCar()
@@ -191,20 +205,19 @@ namespace WPF_POC
             //{
             //    Friction = 0.87
             //});
-            //_car.Initialize(200, 200, 0, 0.9, 0.4, 100, 3 * Math.PI / 180.0, 1.5);
-            _car.Initialize(2, 2, 0, 0.9, 0.4, 1, 3 * Math.PI / 180.0, 1.5);
+            //_car.Initialize(2, 2, 0, 0.9, 0.1, 1, 3 * Math.PI / 180.0, 1.5);
             //_car.Initialize(200, 200, 0, 10, 500, 100, 15*Math.PI/180.0, 0.9);
-            //_car.Initialize(200,200,0);
-            //_car.Initialize(200, 200, 0);
+            _car.Initialize(200,200,0);
         }
 
         private void GameTask()
         {
             //_car = new Car();
-            _car = new CarSkid();
+            //_car = new CarSkid();
             //_car = new CarRobot();
             //_car = new Car4Wheels();
             //_car = new CarPhysics();
+            _car = new Car2Wheels();
             ResetCar();
 
             while(true)

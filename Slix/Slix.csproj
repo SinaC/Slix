@@ -46,14 +46,17 @@
   <ItemGroup>
     <Compile Include="Actions.cs" />
     <Compile Include="Car.cs" />
+    <Compile Include="Car2Wheels.cs" />
     <Compile Include="Car4Wheels.cs" />
     <Compile Include="CarFarseerPhysics.cs" />
+    <Compile Include="CarPacejka.cs" />
     <Compile Include="CarPhysics.cs" />
     <Compile Include="CarPhysics2.cs" />
     <Compile Include="CarRobot.cs" />
     <Compile Include="CarSkid.cs" />
     <Compile Include="GameParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vector2D.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="doc.txt" />
