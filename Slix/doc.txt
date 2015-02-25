@@ -24,3 +24,9 @@ http://sourceforge.net/projects/supertuxkart/
 https://github.com/leereilly/games#user-content-racing
 https://wiki.archlinux.org/index.php/List_of_games#Arcade
 http://sourceforge.net/projects/dustrac/
+https://vtechworks.lib.vt.edu/bitstream/handle/10919/36615/Chapter2a.pdf?sequence=4
+
+http://www.gamedev.net/page/resources/_/technical/math-and-physics/2d-car-physics-r2443
+http://www.gamedev.net/topic/542915-car-physics---slip-ratio-and-torque/
+http://www.gamedev.net/topic/540250-car-steering/
+http://gamedev.stackexchange.com/questions/68103/car-physics-velocity-and-latheral-force

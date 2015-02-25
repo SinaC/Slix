@@ -266,8 +266,8 @@ namespace Slix
         //    // integrate angular velocity to get angular orientation
         //    Angle += AngularVelocity*dt;
 
-        //    System.Diagnostics.Debug.WriteLine("S:{0:F6} FLY:{1:F6} FRY:{2:F6} FTX:{3:F6} T:{4:F6} AA:{5:F6}", Steering, fLateralFrontY, fLateralRearY, fTractionX, torque, angularAcceleration);
-        //    System.Diagnostics.Debug.WriteLine("V:{0} AW:{1} AV:{2:F6} A: {3:F6}", Velocity, accelerationWorld, AngularVelocity, Angle);
+        //    System.Diagnostics.Debug.WriteLine("S:{0:F10} FLY:{1:F10} FRY:{2:F10} FTX:{3:F10} T:{4:F10} AA:{5:F10}", Steering, fLateralFrontY, fLateralRearY, fTractionX, torque, angularAcceleration);
+        //    System.Diagnostics.Debug.WriteLine("V:{0} AW:{1} AV:{2:F10} A: {3:F10}", Velocity, accelerationWorld, AngularVelocity, Angle);
         //}
 
         private void ComputeNormalizedDirection()

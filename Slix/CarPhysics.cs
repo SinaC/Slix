@@ -58,11 +58,11 @@ namespace Slix
             velocityX = forwardVelocityX + rightVelocityX*0.1;
             velocityY = forwardVelocityY + rightVelocityY*0.1;
 
-            System.Diagnostics.Debug.WriteLine("ForwardVelocity: {0:F6} {1:F6}", forwardVelocityX, forwardVelocityY);
-            System.Diagnostics.Debug.WriteLine("RightVelocity: {0:F6} {1:F6}", rightVelocityX, rightVelocityY);
-            System.Diagnostics.Debug.WriteLine("ForwardVector: {0:F6} {1:F6}", ForwardVectorX, ForwardVectorY);
-            System.Diagnostics.Debug.WriteLine("RightVector: {0:F6} {1:F6}", RightVectorX, RightVectorY);
-            System.Diagnostics.Debug.WriteLine("Velocity: {0:F6} {1:F6}", velocityX, velocityY);
+            System.Diagnostics.Debug.WriteLine("ForwardVelocity: {0:F10} {1:F10}", forwardVelocityX, forwardVelocityY);
+            System.Diagnostics.Debug.WriteLine("RightVelocity: {0:F10} {1:F10}", rightVelocityX, rightVelocityY);
+            System.Diagnostics.Debug.WriteLine("ForwardVector: {0:F10} {1:F10}", ForwardVectorX, ForwardVectorY);
+            System.Diagnostics.Debug.WriteLine("RightVector: {0:F10} {1:F10}", RightVectorX, RightVectorY);
+            System.Diagnostics.Debug.WriteLine("Velocity: {0:F10} {1:F10}", velocityX, velocityY);
 
             PositionX += velocityX;
             PositionY += velocityY;

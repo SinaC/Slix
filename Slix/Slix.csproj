@@ -54,9 +54,11 @@
     <Compile Include="CarPhysics2.cs" />
     <Compile Include="CarRobot.cs" />
     <Compile Include="CarSkid.cs" />
+    <Compile Include="CarWheels.cs" />
+    <Compile Include="Vector2D.cs" />
     <Compile Include="GameParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vector2D.cs" />
+    <Compile Include="RigidBody.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="doc.txt" />
