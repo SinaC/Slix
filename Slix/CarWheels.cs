@@ -1,4 +1,6 @@
-﻿namespace Slix
+﻿using System;
+
+namespace Slix
 {
     //http://www.gamedev.net/page/resources/_/technical/math-and-physics/2d-car-physics-r2443
     public class CarWheels : RigidBody
@@ -46,23 +48,26 @@
             public Vector2D CalculateForce(Vector2D relativeGroundSpeed, double dt)
             {
                 //calculate speed of tire patch at ground
-                Vector2D patchSpeed = -ForwardAxis*(WheelSpeed*WheelRadius);
+                Vector2D patchSpeed = ForwardAxis*(WheelSpeed*WheelRadius);
 
                 //get velocity difference between ground and patch
-                Vector2D velocityDifference = relativeGroundSpeed + patchSpeed;
+                Vector2D velocityDifference = relativeGroundSpeed - patchSpeed;
 
                 //project ground speed onto side and forward axis
                 double forwardMag;
-                Vector2D sideVel = velocityDifference.Project(SideAxis);
-                Vector2D forwardVel = velocityDifference.Project(ForwardAxis, out forwardMag);
+                Vector2D sideVelocity = velocityDifference.Project(SideAxis);
+                Vector2D forwardVelocity = velocityDifference.Project(ForwardAxis, out forwardMag);
 
                 //calculate super fake friction forces
                 //calculate response force
-                Vector2D responseForce = -sideVel*2;
-                responseForce -= forwardVel;
+                Vector2D responseForce = -(sideVelocity*2 + forwardVelocity);
 
                 //calculate torque on wheel
                 WheelTorque += forwardMag*WheelRadius;
+
+                //System.Diagnostics.Debug.WriteLine("Forward:{0}", forwardVelocity);
+                //System.Diagnostics.Debug.WriteLine("Side:{0}", sideVelocity);
+                //System.Diagnostics.Debug.WriteLine("Torque:{0}", WheelTorque);
 
                 //integrate total torque into wheel
                 WheelSpeed += WheelTorque/WheelInertia*dt;
@@ -79,22 +84,68 @@
 
         public void HandleActions(Actions actions)
         {
-            if (actions.Accelerate)
-                SetThrottle(+1);
-            else
-                SetThrottle(0);
+            //if (actions.Accelerate)
+            //{
+            //    if (actions.HandBrake)
+            //        SetThrottle(+0.75);
+            //    else
+            //        SetThrottle(+1);
+            //}
+            //else
+            //    SetThrottle(0);
+            //if (actions.Brake)
+            //    SetBrakes(+1);
+            //else
+            //    SetBrakes(0);
+            //if (actions.Left)
+            //{
+            //    if (actions.HandBrake)
+            //        SetSteering(-1.25);
+            //    else
+            //        SetSteering(-1);
+            //}
+            //else if (actions.Right)
+            //{
+            //    if (actions.HandBrake)
+            //        SetSteering(+1.25);
+            //    else
+            //        SetSteering(+1);
+            //}
+            //else
+            //    SetSteering(0);
+
+            //if (actions.Accelerate)
+            //    SetThrottle(+1);
+            //else
+            //    SetThrottle(0);
+            //if (actions.Brake)
+            //    SetBrakes(+1);
+            //else
+            //    SetBrakes(0);
+            //if (actions.Left)
+            //    SetSteering(-1);
+            //else if (actions.Right)
+            //    SetSteering(+1);
+            //else
+            //    SetSteering(0);
+
+            double throttle = 0;
+            double brakes = 0;
+            double steering = 0;
+
             if (actions.Brake)
-                SetBrakes(+1);
-            else
-                SetBrakes(0);
+                brakes = +1;
+            else if (actions.Accelerate)
+                throttle = +1;
             if (actions.Left)
-                SetSteering(-1);
+                steering = -1;
             else if (actions.Right)
-                SetSteering(+1);
-            else
-                SetSteering(0);
-            
-            
+                steering = +1;
+
+            SetSteering(steering);
+            SetThrottle(throttle);
+            SetBrakes(brakes);
+
             //SetThrottle(+1);
             //SetBrakes(+1);
             //SetSteering(-0.5);
@@ -115,6 +166,9 @@
 
         public override void Step(double dt)
         {
+            const double drag = 0.4257;
+            const double rollingResistance = 12.8;
+            
             System.Diagnostics.Debug.WriteLine("STEP:{0:F10}", dt);
 
             foreach (Wheel wheel in _wheels)
@@ -135,33 +189,34 @@
                 AddForce(worldResponseForce, worldWheelOffset);
             }
 
-            //double Drag = 0.4257;
-            //double RollingResistance = 12.8;
-            //Vector2D fDrag = -Drag * Velocity.Length * Velocity;
-            //Vector2D fRollingResistance = -RollingResistance * Velocity;
-            //AddForce(fDrag, Velocity);
-            //AddForce(fRollingResistance, Velocity);
+            // Friction
+            Vector2D fDrag = -drag * Velocity.Length * Velocity;
+            Vector2D fRollingResistance = -rollingResistance * Velocity;
+            AddForce(fDrag, Velocity);
+            AddForce(fRollingResistance, Velocity);
 
             base.Step(dt);
 
             System.Diagnostics.Debug.WriteLine("Position:{0}", Position);
             System.Diagnostics.Debug.WriteLine("Angle:{0}", Angle);
+            System.Diagnostics.Debug.WriteLine("Speed:{0:F6}", Speed);
         }
 
         private void SetSteering(double steering)
         {
-            const double steeringLock = 0.75;
+            //const double steeringLock = Math.PI/4;
+            const double steeringLock = Math.PI / 24;
 
             Steering = steering;
 
             //apply steering angle to front wheels
-            _wheels[0].SetSteeringAngle(steering*steeringLock); // -steering ?
-            _wheels[1].SetSteeringAngle(steering*steeringLock); // -steering ?
+            _wheels[0].SetSteeringAngle(steering*steeringLock);
+            _wheels[1].SetSteeringAngle(steering*steeringLock);
         }
 
         private void SetThrottle(double throttle, bool allWheel = false)
         {
-            const double torque = 20.0;
+            const double torque = 500.0;
 
             Throttle = throttle;
 
@@ -179,7 +234,7 @@
 
         private void SetBrakes(double brakes)
         {
-            const double brakeTorque = 4.0;
+            const double brakeTorque = 0.25;
 
             Brakes = brakes;
 

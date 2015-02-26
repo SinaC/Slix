@@ -47,14 +47,25 @@ namespace WPF_POC
             //        Height = 10,
             //        Fill = new SolidColorBrush(Colors.Black)
             //    };
-            _carUI = new Rectangle
-            {
-                Width = 10,
-                Height = 20,
-                Stroke = new SolidColorBrush(Colors.Black)
-            };
+            //_carUI = new Rectangle
+            //{
+            //    Width = 10,
+            //    Height = 20,
+            //    Stroke = new SolidColorBrush(Colors.Black)
+            //};
+            //canvasTest.Children.Add(_carUI);
+            
+           Path path = new Path
+               {
+                   SnapsToDevicePixels = true,
+                   Data = Geometry.Parse("M 0,0 L 10,0 L 10,20 L 5,25 L 0,20 L 0,0"),
+                   Stroke = new SolidColorBrush(Colors.Black)
+               };
+            //
+            _carUI = path;
             canvasTest.Children.Add(_carUI);
 
+            //
             AddBend(100, 100, 100, Colors.Yellow);
             AddBend(100, 300, 100, Colors.Yellow);
             AddBend(300, 100, 100, Colors.Orange);
@@ -220,19 +231,22 @@ namespace WPF_POC
                     String.Format("Torque: {0:F6}", _car.Torque),
                     String.Format("Inertia: {0:F6}", _car.Inertia),
                 };
-            lstDatas.ItemsSource = _datas;
+            //lstDatas.ItemsSource = _datas;
+            lstDatas.Items.Clear();
+            foreach (string s in _datas)
+                lstDatas.Items.Add(s);
 
-            //Ellipse myEllipse = new Ellipse
-            //    {
-            //        Fill = new SolidColorBrush(Colors.White),
-            //        StrokeThickness = 1,
-            //        Stroke = Brushes.White,
-            //        Width = 2,
-            //        Height = 2
-            //    };
-            //Canvas.SetTop(myEllipse, posY);
-            //Canvas.SetLeft(myEllipse, posX);
-            //canvasTest.Children.Add(myEllipse);
+            Ellipse myEllipse = new Ellipse
+                {
+                    Fill = new SolidColorBrush(Colors.White),
+                    StrokeThickness = 1,
+                    Stroke = Brushes.White,
+                    Width = 2,
+                    Height = 2
+                };
+            Canvas.SetTop(myEllipse, posY);
+            Canvas.SetLeft(myEllipse, posX);
+            canvasTest.Children.Add(myEllipse);
         }
 
         private void ResetCar()
